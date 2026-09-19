@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Premium HR Business Website"
+description = "A premium multi-page HR consultancy website with a Three.js hero experience, service storytelling, portfolio proof, and a validated enquiry form."
+version = "1.0.0"
+id = "artifacts/hr-business-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25914
+
+[services.development]
+run = "pnpm --filter @workspace/hr-business-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/hr-business-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/hr-business-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25914"
+BASE_PATH = "/"
